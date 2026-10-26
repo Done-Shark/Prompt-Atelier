@@ -1,0 +1,16 @@
+node_modules/
+web/dist/
+data/
+.qa/
+*.log
+.DS_Store
+release/
+.chrome-profile*/
+release*/
+.env
+.env.*
+Thumbs.db
+*.local
+# 内部协作记录，不随仓库发布
+docs/REVIEW.md
+docs/TEAM.md

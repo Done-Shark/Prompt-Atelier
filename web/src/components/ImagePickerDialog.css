@@ -1,0 +1,107 @@
+/* 示例图选择器：从图片库里挑一张，用于 Prompt 行左侧的示例图。 */
+.image-picker {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.image-picker__hint {
+  margin: 0;
+  color: var(--text-3);
+  font-size: var(--fs-small);
+  line-height: var(--lh-small);
+}
+
+.image-picker__toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
+}
+
+.image-picker__search {
+  position: relative;
+  flex: 1;
+  min-width: 180px;
+}
+
+.image-picker__search-icon {
+  position: absolute;
+  top: 50%;
+  left: 9px;
+  transform: translateY(-50%);
+  color: var(--text-3);
+  pointer-events: none;
+}
+
+.image-picker__search .input {
+  width: 100%;
+  padding-left: 28px;
+}
+
+.image-picker__loading {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-6) 0;
+  color: var(--text-3);
+  font-size: var(--fs-small);
+}
+
+.image-picker__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
+  gap: var(--sp-2);
+  max-height: min(46vh, 420px);
+  overflow: auto;
+  padding: 2px;
+}
+
+.image-picker__item {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--r-ctl);
+  background: var(--surface-2);
+  transition: border-color var(--dur-1) var(--ease-out), transform var(--dur-1) var(--ease-out);
+}
+
+.image-picker__item:hover {
+  border-color: var(--text-off);
+}
+
+.image-picker__item[data-active='true'] {
+  border-color: var(--accent-solid);
+  box-shadow: 0 0 0 2px var(--accent-wash);
+}
+
+.image-picker__item:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.image-picker__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.image-picker__badge {
+  position: absolute;
+  left: 4px;
+  bottom: 4px;
+  padding: 1px 5px;
+  border-radius: 999px;
+  background: var(--accent-solid);
+  color: var(--on-accent);
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+.image-picker__more {
+  display: flex;
+  justify-content: center;
+  padding-top: var(--sp-1);
+}

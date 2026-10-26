@@ -1,0 +1,265 @@
+/* 导入弹窗。组件在 components/ImportDialog.tsx，图片库与设置页共用。 */
+
+/* ---------------- 导入弹窗 ---------------- */
+.import-dialog {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.import-target {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.import-label {
+  color: var(--text-3);
+  font-size: var(--fs-small);
+}
+
+.import-hint {
+  flex-basis: 100%;
+  color: var(--text-off);
+  font-size: var(--fs-caption);
+  line-height: var(--lh-caption);
+}
+
+.import-tabs {
+  display: flex;
+  gap: var(--sp-4);
+  border-bottom: 1px solid var(--divider);
+}
+
+.import-tab {
+  position: relative;
+  height: 32px;
+  color: var(--text-3);
+  font-size: var(--fs-small);
+}
+
+.import-tab:hover {
+  color: var(--text);
+}
+
+.import-tab[data-active='true'] {
+  color: var(--text);
+}
+
+.import-tab[data-active='true']::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 2px 2px 0 0;
+}
+
+.import-pane {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.import-row {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.import-path {
+  flex: 1;
+  min-width: 0;
+}
+
+.import-error {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 0;
+  color: var(--danger-text);
+  font-size: var(--fs-caption);
+  line-height: var(--lh-caption);
+}
+
+.import-preview {
+  border: 1px solid var(--border);
+  border-radius: var(--r-card);
+  overflow: hidden;
+}
+
+.import-preview__head {
+  padding: 6px var(--sp-3);
+  background: var(--surface-2);
+  color: var(--text-3);
+  font-size: var(--fs-caption);
+}
+
+.import-preview__list {
+  max-height: 220px;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+  list-style: none;
+}
+
+.import-preview__row {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: 6px var(--sp-3);
+  border-top: 1px solid var(--divider);
+}
+
+.import-preview__name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--text-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-caption);
+}
+
+.import-drop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: var(--sp-10) var(--sp-6);
+  border: 1px dashed var(--border);
+  border-radius: var(--r-card);
+  background: var(--surface-2);
+  cursor: pointer;
+  text-align: center;
+  transition: border-color var(--dur-2) var(--ease-out), background var(--dur-2) var(--ease-out);
+}
+
+.import-drop:hover,
+.import-drop:focus-visible {
+  border-color: var(--text-off);
+}
+
+.import-drop[data-dragging='true'] {
+  border-color: var(--accent);
+  background: var(--accent-wash);
+}
+
+.import-drop__icon {
+  color: var(--text-off);
+}
+
+.import-drop__title {
+  margin: 0;
+  color: var(--text-2);
+  font-size: var(--fs-body);
+}
+
+.import-drop__text {
+  margin: 0;
+  color: var(--text-3);
+  font-size: var(--fs-caption);
+}
+
+.import-files {
+  max-height: 180px;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+  list-style: none;
+}
+
+.import-files__row {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: 4px 2px;
+  border-bottom: 1px solid var(--divider);
+}
+
+.import-files__name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--text-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-caption);
+}
+
+.import-files__size {
+  color: var(--text-off);
+  font-size: var(--fs-caption);
+}
+
+.import-progress {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  color: var(--text-3);
+  font-size: var(--fs-caption);
+}
+
+.import-result {
+  padding: var(--sp-4);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-card);
+}
+
+.import-result__head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--ok-text);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-medium);
+}
+
+.import-result__icon {
+  flex: none;
+}
+
+.import-result__summary {
+  margin: var(--sp-2) 0 0;
+  color: var(--text-2);
+  font-size: var(--fs-small);
+}
+
+.import-result__list {
+  margin: var(--sp-2) 0 0;
+  padding-left: var(--sp-4);
+  color: var(--text-3);
+  font-size: var(--fs-caption);
+}
+
+.import-result__list li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.import-result__reason {
+  color: var(--text-off);
+}
+
+.import-folder-hint {
+  margin: 0;
+  padding: var(--sp-2) var(--sp-3);
+  background: var(--accent-wash);
+  border-radius: var(--r-ctl);
+  color: var(--text-2);
+  font-size: var(--fs-caption);
+}
+
+.import-folder-hint strong {
+  color: var(--text);
+  font-weight: var(--fw-medium);
+}

@@ -1,0 +1,96 @@
+/* Tag 快捷编辑浮层：右键图片详情里的 tag 打开，直接写回 Tag 库。 */
+.tag-popover {
+  position: fixed;
+  z-index: 120;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: var(--sp-3);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow-pop);
+  animation: modal-in var(--dur-1) var(--ease-out);
+}
+
+.tag-popover__head {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  margin-bottom: 2px;
+}
+
+.tag-popover__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--text);
+  font-size: var(--fs-small);
+  text-align: left;
+}
+
+.tag-popover__tag:hover {
+  color: var(--accent);
+}
+
+.tag-popover__tag svg {
+  flex: none;
+  opacity: 0;
+}
+
+.tag-popover__tag:hover svg {
+  opacity: 1;
+}
+
+.tag-popover__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  flex: none;
+  border-radius: var(--r-sm);
+  color: var(--text-3);
+}
+
+.tag-popover__close:hover {
+  background: var(--hover);
+  color: var(--text);
+}
+
+.tag-popover__label {
+  color: var(--text-3);
+  font-size: var(--fs-caption);
+}
+
+.tag-popover__label:not(:first-of-type) {
+  margin-top: 2px;
+}
+
+.tag-popover__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-2);
+  margin-top: var(--sp-1);
+  padding-top: var(--sp-2);
+  border-top: 1px solid var(--divider);
+}
+
+.tag-popover__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-3);
+  font-size: var(--fs-caption);
+  line-height: 1.2;
+}
+
+.tag-popover__status svg {
+  flex: none;
+}

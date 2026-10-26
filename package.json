@@ -1,0 +1,101 @@
+{
+  "name": "prompt-atelier",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Local-first prompt and image manager for NovelAI and ComfyUI",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "dev": "concurrently -k -n server,web,app -c blue,magenta,green \"npm:dev:server\" \"npm:dev:web\" \"npm:dev:app\"",
+    "dev:app": "wait-on http://127.0.0.1:5173 && node scripts/start-electron.mjs --dev",
+    "dev:server": "node --watch server/index.js",
+    "dev:web": "vite --config web/vite.config.ts",
+    "build": "vite build --config web/vite.config.ts",
+    "start": "node scripts/start-electron.mjs",
+    "start:web": "node server/index.js",
+    "preview": "npm run build && npm run start:web",
+    "test": "node --test server shared/prompt/doc.test.js",
+    "test:web": "vitest run --config web/vite.config.ts",
+    "typecheck": "tsc -p web/tsconfig.json --noEmit",
+    "seed": "node server/scripts/seed.js",
+    "import:dict": "node server/scripts/import-dictionary.js",
+    "icon": "node scripts/make-icon.mjs",
+    "pack": "npm run build && npm run icon && electron-builder --dir",
+    "dist": "npm run build && npm run icon && electron-builder --win nsis portable"
+  },
+  "dependencies": {
+    "lucide-react": "^1.59.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "concurrently": "^9.2.4",
+    "electron": "^44.9.0",
+    "electron-builder": "^26.18.0",
+    "happy-dom": "^21.0.3",
+    "typescript": "^5.9.3",
+    "vite": "^8.3.4",
+    "vitest": "^5.0.5",
+    "wait-on": "^9.5.1"
+  },
+  "build": {
+    "appId": "app.promptatelier.desktop",
+    "productName": "Prompt Atelier",
+    "copyright": "Prompt Atelier",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "electron/**/*",
+      "server/**/*",
+      "shared/**/*",
+      "web/dist/**/*",
+      "package.json",
+      "!server/**/*.test.js",
+      "!**/*.md"
+    ],
+    "asar": true,
+    "npmRebuild": false,
+    "win": {
+      "icon": "build/icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Prompt Atelier",
+      "artifactName": "PromptAtelier-${version}-setup.${ext}"
+    },
+    "portable": {
+      "artifactName": "PromptAtelier-${version}-portable.${ext}"
+    },
+    "linux": {
+      "icon": "build/icon.png",
+      "target": [
+        "AppImage"
+      ]
+    }
+  },
+  "author": "Prompt Atelier",
+  "productName": "Prompt Atelier"
+}

@@ -1,0 +1,317 @@
+/* Prompt Atelier — 设计令牌
+ * 唯一来源。所有颜色、字号、间距、圆角、动效都从这里取，组件里不写死数值。
+ * 主题由 <html data-theme="dark|light"> 控制。
+ *
+ * 视觉方向："安静的暗房"（The Quiet Darkroom）
+ *   - 界面本身几乎无彩，颜色只属于内容：Prompt 的语法、Tag 的分类、两种目标格式的身份色。
+ *   - 主操作按钮用墨色/纸色（--ink），强调色（--accent）只用于选中、焦点、当前项。
+ *   - NAI 与 ComfyUI 各有一个身份色（--nai / --comfy），只用于小面积标记与分区，不铺满界面。
+ *   - 三种字体各管一件事：界面用无衬线；Prompt 用等宽（便于对齐权重与逗号）；笔记用衬线。
+ */
+
+:root {
+  /* ---------- 字体 ---------- */
+  --font-ui: "Inter", "Segoe UI Variable Text", "Segoe UI", "PingFang SC", "Microsoft YaHei UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Cascadia Mono", "SFMono-Regular", Consolas, "Liberation Mono", "Microsoft YaHei UI", monospace;
+  --font-prose: "Newsreader", "Source Serif 4", Georgia, "Songti SC", "SimSun", serif;
+
+  /* ---------- 字号 / 行高 ---------- */
+  --fs-display: 22px;
+  --lh-display: 30px;
+  --fs-title: 15px;
+  --lh-title: 22px;
+  --fs-body: 13px;
+  --lh-body: 20px;
+  --fs-small: 12px;
+  --lh-small: 18px;
+  --fs-caption: 11px;
+  --lh-caption: 16px;
+  --fs-prose: 15px;
+  --lh-prose: 24px;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-strong: 600;
+
+  /* ---------- 间距（4px 网格） ---------- */
+  --sp-0: 2px;
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-10: 40px;
+
+  /* ---------- 圆角 ---------- */
+  --r-sm: 5px;
+  --r-ctl: 7px;
+  --r-card: 10px;
+  --r-panel: 14px;
+  --r-pill: 999px;
+
+  /* ---------- 控件尺寸 ---------- */
+  --ctl: 32px;
+  --ctl-sm: 26px;
+  --ctl-lg: 38px;
+  --icon: 16px;
+  --icon-sm: 14px;
+  --rail-w: 64px;
+  --nav-w: 216px;
+  --folders-w: 216px;
+  --detail-w: 380px;
+  --editor-w: 520px;
+  --topbar-h: 52px;
+  --row-h: 34px;
+
+  /* ---------- 线 ---------- */
+  --bw: 1px;
+  --rule-w: 2px;
+  --focus-w: 2px;
+
+  /* ---------- 动效 ---------- */
+  --dur-1: 120ms;
+  --dur-2: 180ms;
+  --dur-3: 240ms;
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-move: cubic-bezier(0.3, 0, 0, 1);
+
+  /* ---------- 状态色（两套主题共用色相，明度各自调整） ---------- */
+  --ok: #0f7a5f;
+  --warn: #91600a;
+  --danger: #a82a40;
+  --info: #1d6fae;
+
+  /* ---------- 目标身份色 ---------- */
+  --nai: #6d5ce7;
+  --comfy: #0e8f83;
+}
+
+/* ================= 深色（默认） ================= */
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* 表面：画布 → 结构面板 → 内容面 → 浮层 */
+  --bg: #141312;
+  --pane: #100f0e;
+  --surface: #1b1a18;
+  --surface-2: #211f1d;
+  --surface-3: #272521;
+  --hover: #232120;
+  --selected: #2d2a26;
+  --border: #322f2b;
+  --divider: #262421;
+
+  /* 文字 */
+  --text: #f2efe9;
+  --text-2: #aeaaa2;
+  --text-3: #8b877f;
+  --text-off: #5e5a54;
+
+  /* 墨色主操作（深色主题下是纸色） */
+  --ink: #f2efe9;
+  --ink-hover: #ffffff;
+  --on-ink: #161513;
+
+  /* 强调色：只用于选中、焦点、当前项 */
+  --accent: #a99bff;
+  --accent-solid: #6d5ce7;
+  --accent-hover: #5b49dd;
+  --on-accent: #ffffff;
+  --accent-wash: rgba(169, 155, 255, 0.12);
+  --focus: #a99bff;
+
+  /* 目标身份色（文字可读版本） */
+  --nai-text: #b0a3ff;
+  --nai-wash: rgba(109, 92, 231, 0.16);
+  --comfy-text: #4fd1c0;
+  --comfy-wash: rgba(14, 143, 131, 0.16);
+
+  /* 状态底色 */
+  --ok-wash: rgba(63, 198, 160, 0.12);
+  --warn-wash: rgba(229, 155, 55, 0.12);
+  --danger-wash: rgba(254, 129, 140, 0.11);
+  --info-wash: rgba(102, 178, 253, 0.12);
+  --ok-text: #4fd1a5;
+  --warn-text: #e8a44a;
+  --danger-text: #fe818c;
+  --info-text: #7cbcff;
+
+  /* Prompt 语法高亮 */
+  --syn-text: #e6e2da;
+  --syn-weight: #e0b464;
+  --syn-weight-neg: #8fb8e8;
+  --syn-lora: #4fd1c0;
+  --syn-sep: #6f6a62;
+  --syn-paren: #9a948a;
+
+  /* 图片承载底色：任何主题下都保持深色，避免透明图与画布混在一起 */
+  --image-bg: #0c0b0a;
+
+  --scrim: rgba(0, 0, 0, 0.6);
+  --shadow-pop: 0 12px 32px rgba(0, 0, 0, 0.55), 0 0 0 1px var(--border);
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+/* ================= 浅色 ================= */
+[data-theme="light"] {
+  color-scheme: light;
+
+  --bg: #faf9f6;
+  --pane: #f2f1ec;
+  --surface: #ffffff;
+  --surface-2: #f7f6f2;
+  --surface-3: #efeee8;
+  --hover: #f0efea;
+  --selected: #e8e6df;
+  --border: #e2e0d8;
+  --divider: #ecebe4;
+
+  --text: #1b1a17;
+  --text-2: #5b5851;
+  --text-3: #7a776f;
+  --text-off: #aaa79f;
+
+  --ink: #1b1a17;
+  --ink-hover: #33312b;
+  --on-ink: #ffffff;
+
+  --accent: #4f3fc4;
+  --accent-solid: #5b4ad6;
+  --accent-hover: #4a39c2;
+  --on-accent: #ffffff;
+  --accent-wash: rgba(91, 74, 214, 0.08);
+  --focus: #4f3fc4;
+
+  --nai-text: #5340c9;
+  --nai-wash: rgba(91, 74, 214, 0.09);
+  --comfy-text: #0b756c;
+  --comfy-wash: rgba(14, 143, 131, 0.09);
+
+  --ok-wash: rgba(15, 122, 95, 0.08);
+  --warn-wash: rgba(145, 96, 10, 0.09);
+  --danger-wash: rgba(168, 42, 64, 0.07);
+  --info-wash: rgba(29, 111, 174, 0.08);
+  --ok-text: #0b6b53;
+  --warn-text: #7d5209;
+  --danger-text: #a02a3e;
+  --info-text: #1a6096;
+
+  --syn-text: #23221e;
+  --syn-weight: #8a5a00;
+  --syn-weight-neg: #1f5f96;
+  --syn-lora: #0b756c;
+  --syn-sep: #9b978d;
+  --syn-paren: #6f6b62;
+
+  --image-bg: #0c0b0a;
+
+  --scrim: rgba(27, 26, 23, 0.28);
+  --shadow-pop: 0 12px 32px rgba(27, 26, 23, 0.14), 0 0 0 1px var(--border);
+  --shadow-card: 0 1px 2px rgba(27, 26, 23, 0.05);
+}
+
+/* ================= 基础重置 ================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-ui);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+::selection {
+  background: var(--accent-wash);
+  color: var(--text);
+}
+
+/* 滚动条：细、浮在内容上，不抢视觉 */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: var(--r-pill);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--text-off);
+  background-clip: padding-box;
+  border: 2px solid transparent;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* 焦点环：只在键盘导航时出现 */
+:focus-visible {
+  outline: var(--focus-w) solid var(--focus);
+  outline-offset: 1px;
+  border-radius: var(--r-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* 设置里的"减少动效"：比系统偏好更明确，直接关闭过渡与动画 */
+html[data-reduce-motion='true'] *,
+html[data-reduce-motion='true'] *::before,
+html[data-reduce-motion='true'] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}

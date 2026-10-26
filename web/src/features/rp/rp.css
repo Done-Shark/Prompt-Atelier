@@ -1,0 +1,425 @@
+/* RP 角色卡：左列表 + 右详情 */
+.rp-page {
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+}
+
+.rp-list {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  flex: none;
+  background: var(--pane);
+  border-right: 1px solid var(--divider);
+}
+
+.rp-list__head {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: var(--sp-3) var(--sp-2) var(--sp-2) var(--sp-3);
+}
+
+.rp-list__count {
+  margin-right: auto;
+  color: var(--text-off);
+  font-family: var(--font-mono);
+  font-size: var(--fs-caption);
+}
+
+.rp-list__search {
+  position: relative;
+  padding: 0 var(--sp-2) var(--sp-2);
+}
+
+.rp-list__search-icon {
+  position: absolute;
+  top: 50%;
+  left: 18px;
+  transform: translateY(-50%);
+  color: var(--text-3);
+  pointer-events: none;
+}
+
+.rp-list__search .input {
+  width: 100%;
+  padding-left: 28px;
+}
+
+.rp-list__scroll {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 0 var(--sp-2) var(--sp-4);
+}
+
+.rp-list__loading {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-4);
+  color: var(--text-3);
+  font-size: var(--fs-small);
+}
+
+.rp-row {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  width: 100%;
+  padding: 6px;
+  border-radius: var(--r-ctl);
+  text-align: left;
+  transition: background var(--dur-1) var(--ease-out);
+}
+
+.rp-row:hover {
+  background: var(--hover);
+}
+
+.rp-row[data-active='true'] {
+  background: var(--selected);
+}
+
+.rp-row__thumb {
+  width: 52px;
+  height: 52px;
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--r-ctl);
+  background: var(--surface-2);
+  color: var(--text-3);
+}
+
+.rp-row__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.rp-row__body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.rp-row__name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--text);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
+}
+
+.rp-row__tags {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--text-3);
+  font-size: var(--fs-caption);
+}
+
+.rp-detail {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.rp-detail__head {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-4);
+  padding: var(--sp-5) var(--sp-6) var(--sp-4);
+  border-bottom: 1px solid var(--divider);
+}
+
+.rp-detail__cover {
+  width: 132px;
+  height: 132px;
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--r-card);
+  background: var(--surface-2);
+  color: var(--text-3);
+}
+
+.rp-detail__cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.rp-detail__title {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  flex: 1;
+}
+
+.rp-detail__title h1 {
+  margin: 0;
+  color: var(--text);
+  font-size: 20px;
+  font-weight: var(--fw-strong);
+  line-height: 1.3;
+}
+
+.rp-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.rp-tag {
+  padding: 1px 7px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--text-2);
+  font-size: var(--fs-caption);
+}
+
+.rp-detail__meta {
+  margin: 0;
+  color: var(--text-3);
+  font-size: var(--fs-caption);
+}
+
+.rp-detail__muted {
+  color: var(--text-3);
+  font-size: var(--fs-caption);
+}
+
+.rp-detail__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-1);
+  flex: none;
+}
+
+.rp-detail__scroll {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: var(--sp-5) var(--sp-6) var(--sp-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+}
+
+.rp-detail__empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.rp-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.rp-section__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-2);
+}
+
+.rp-section__head h2 {
+  margin: 0;
+  color: var(--text-2);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
+}
+
+.rp-section__text {
+  margin: 0;
+  color: var(--text);
+  font-size: var(--fs-body);
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+
+.rp-prompt {
+  margin: 0;
+  padding: var(--sp-3);
+  overflow: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--r-card);
+  background: var(--surface-2);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* 编辑器 */
+.rp-editor {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.rp-editor__image {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-3);
+}
+
+.rp-editor__preview {
+  width: 96px;
+  height: 96px;
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px dashed var(--border);
+  border-radius: var(--r-ctl);
+  background: var(--surface-2);
+  color: var(--text-3);
+}
+
+.rp-editor__preview:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.rp-editor__preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.rp-editor__image-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.rp-editor__hint {
+  margin: 0;
+  max-width: 360px;
+  color: var(--text-3);
+  font-size: var(--fs-caption);
+  line-height: var(--lh-caption);
+}
+
+.rp-editor__hint code {
+  padding: 1px 4px;
+  border-radius: 4px;
+  background: var(--surface-2);
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.rp-editor__row {
+  display: flex;
+  gap: var(--sp-2);
+}
+
+.rp-editor__field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.rp-editor__field > span {
+  color: var(--text-3);
+  font-size: var(--fs-caption);
+}
+
+@media (max-width: 1080px) {
+  .rp-list {
+    width: 250px;
+  }
+  .rp-detail__head,
+  .rp-detail__scroll {
+    padding-left: var(--sp-4);
+    padding-right: var(--sp-4);
+  }
+}
+
+/* 文件夹列（复用图库的 ifolder 样式，仅调整宽度） */
+.rp-folders {
+  display: flex;
+  flex-direction: column;
+  width: 208px;
+  flex: none;
+  overflow: hidden;
+  background: var(--pane);
+  border-right: 1px solid var(--divider);
+}
+
+.rp-folders .ifolder__list {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+
+.rp-list {
+  width: 280px;
+}
+
+
+/* 拖角色卡到文件夹 */
+.rp-row[data-dragging='true'] {
+  opacity: 0.45;
+}
+
+.ifolder-row[data-card-over='true'] {
+  background: var(--accent-wash);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+/* 批量选择 */
+.rp-batch {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2px;
+  margin: 0 var(--sp-2) var(--sp-2);
+  padding: 4px 6px;
+  border-radius: var(--r-ctl);
+  background: var(--accent-wash);
+}
+
+.rp-batch__count {
+  margin-right: auto;
+  color: var(--text-2);
+  font-size: var(--fs-caption);
+}
+
+.rp-row__check {
+  display: flex;
+  align-items: center;
+  padding-left: 2px;
+  flex: none;
+}
+
+.rp-row[data-selected='true'] {
+  background: var(--accent-wash);
+}

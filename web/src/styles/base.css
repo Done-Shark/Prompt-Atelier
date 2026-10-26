@@ -1,0 +1,347 @@
+/* 应用外壳与通用布局。组件样式在 ui.css，业务样式在各自 feature 目录。 */
+
+html,
+body,
+#root {
+  height: 100%;
+  overflow: hidden;
+}
+
+.app {
+  display: flex;
+  height: 100%;
+  background: var(--bg);
+}
+
+/* ---------------- 左侧导航 ---------------- */
+.rail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: var(--rail-w);
+  flex: none;
+  padding: 12px 0;
+  gap: 2px;
+  background: var(--pane);
+  border-right: 1px solid var(--divider);
+  -webkit-app-region: drag;
+}
+
+.rail__brand {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  margin-bottom: 10px;
+  border-radius: 9px;
+  background: var(--ink);
+  color: var(--on-ink);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: var(--fw-strong);
+  letter-spacing: -0.04em;
+  user-select: none;
+}
+
+.rail__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+  padding: 0 8px;
+}
+
+.rail__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  height: 50px;
+  border-radius: var(--r-ctl);
+  color: var(--text-3);
+  font-size: 10px;
+  line-height: 1;
+  -webkit-app-region: no-drag;
+  transition: background var(--dur-1) var(--ease-out), color var(--dur-1) var(--ease-out);
+}
+
+.rail__item span {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rail__item:hover {
+  background: var(--hover);
+  color: var(--text-2);
+}
+
+.rail__item[data-active='true'] {
+  background: var(--accent-wash);
+  color: var(--accent);
+}
+
+.rail__foot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  margin-top: auto;
+  -webkit-app-region: no-drag;
+}
+
+/* ---------------- 主区域 ---------------- */
+.shell {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  height: var(--topbar-h);
+  flex: none;
+  padding-left: var(--sp-4);
+  background: var(--pane);
+  border-bottom: 1px solid var(--divider);
+  -webkit-app-region: drag;
+}
+
+.topbar__title {
+  font-size: var(--fs-title);
+  font-weight: var(--fw-medium);
+  white-space: nowrap;
+}
+
+.topbar__sub {
+  color: var(--text-3);
+  font-size: var(--fs-small);
+  white-space: nowrap;
+}
+
+.search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: min(440px, 38vw);
+  min-width: 180px;
+  -webkit-app-region: no-drag;
+}
+
+.search__icon {
+  position: absolute;
+  left: 9px;
+  color: var(--text-3);
+  pointer-events: none;
+}
+
+.search .input {
+  height: 30px;
+  padding-left: 30px;
+  padding-right: 46px;
+  background: var(--surface-2);
+}
+
+.search__kbd {
+  position: absolute;
+  right: 7px;
+  pointer-events: none;
+}
+
+.topbar__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-1);
+  margin-left: auto;
+  padding-right: var(--sp-2);
+  -webkit-app-region: no-drag;
+}
+
+.wincontrols {
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+  margin-left: var(--sp-1);
+  -webkit-app-region: no-drag;
+}
+
+.wincontrol {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 100%;
+  color: var(--text-2);
+  transition: background var(--dur-1) var(--ease-out), color var(--dur-1) var(--ease-out);
+}
+
+.wincontrol:hover {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.wincontrol--close:hover {
+  background: #c42b1c;
+  color: #fff;
+}
+
+.page-host {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+}
+
+/* ---------------- 通用工作区骨架 ---------------- */
+.workspace {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+}
+
+.workspace__panel {
+  display: flex;
+  flex-direction: column;
+  width: var(--folders-w);
+  flex: none;
+  min-height: 0;
+  background: var(--pane);
+  border-right: 1px solid var(--divider);
+}
+
+.workspace__main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  background: var(--bg);
+}
+
+.workspace__detail {
+  display: flex;
+  flex-direction: column;
+  width: var(--detail-w);
+  flex: none;
+  min-height: 0;
+  background: var(--surface);
+  border-left: 1px solid var(--divider);
+}
+
+/* ---------------- 工具条 / 页头 ---------------- */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  flex: none;
+  min-height: 48px;
+  padding: 0 var(--sp-4);
+  border-bottom: 1px solid var(--divider);
+}
+
+.toolbar__spacer {
+  flex: 1;
+}
+
+.toolbar__count {
+  color: var(--text-3);
+  font-size: var(--fs-small);
+  font-variant-numeric: tabular-nums;
+}
+
+.panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-2);
+  padding: var(--sp-3) var(--sp-3) var(--sp-1);
+}
+
+.panel-head__title {
+  color: var(--text-3);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.04em;
+}
+
+.section {
+  padding: var(--sp-4) var(--sp-5);
+  border-bottom: 1px solid var(--divider);
+}
+
+.section:last-child {
+  border-bottom: 0;
+}
+
+.section__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-3);
+}
+
+.section__title {
+  margin: 0;
+  color: var(--text-2);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
+}
+
+.section__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+/* ---------------- 页面级状态 ---------------- */
+.boot {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-3);
+  color: var(--text-3);
+  font-size: var(--fs-small);
+}
+
+/* ---------------- 响应式 ---------------- */
+@media (max-width: 1180px) {
+  .workspace__detail {
+    width: 340px;
+  }
+}
+
+@media (max-width: 1040px) {
+  .workspace__panel {
+    width: 184px;
+  }
+  .workspace__detail {
+    display: none;
+  }
+  .search {
+    width: 260px;
+  }
+}
+
+.rail__version {
+  color: var(--text-off);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding-bottom: var(--sp-1);
+  user-select: none;
+}
+
+/* 侧栏指针拖拽进行中：统一 grabbing 光标并禁止选中文字 */
+body[data-row-dragging='true'],
+body[data-row-dragging='true'] * {
+  cursor: grabbing !important;
+  user-select: none;
+}
